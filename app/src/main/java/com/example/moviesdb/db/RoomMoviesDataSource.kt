@@ -4,7 +4,7 @@ import android.content.Context
 import com.example.moviesdb.core.data.MovieT
 import com.example.moviesdb.core.use_cases.MoviesDBDataSource
 
-class RoomMovieDataSource(context: Context): MoviesDBDataSource {
+class RoomMoviesDataSource(context: Context): MoviesDBDataSource {
 
     private val movieDao = DatabaseService.getInstance(context).movieDao()
 
