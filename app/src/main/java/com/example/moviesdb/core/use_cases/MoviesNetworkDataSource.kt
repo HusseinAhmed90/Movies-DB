@@ -4,6 +4,6 @@ import com.example.moviesdb.core.data.MovieT
 
 interface MoviesNetworkDataSource {
 
-    suspend fun getMoviesFromApi(): List<MovieT>
+    suspend fun getMoviesFromApi(page: Int): List<MovieT>
 
 }
