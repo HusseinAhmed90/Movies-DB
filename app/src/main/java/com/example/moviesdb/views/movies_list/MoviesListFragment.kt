@@ -1,4 +1,4 @@
-package com.example.moviesdb.views
+package com.example.moviesdb.views.movies_list
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -22,7 +22,7 @@ class MoviesListFragment : Fragment() {
     // TODO: Navigate to details when a movie item clicked
     private fun navigateToMovieDetailsFragment(movie: MovieT) {
         findNavController().navigate(
-            MoviesListFragmentDirections.actionMoviesListFragmentToMovieDetailsFragment(movie)
+            MoviesListFragmentDirections.toMovieDetailsFragment(movie)
         )
     }
 

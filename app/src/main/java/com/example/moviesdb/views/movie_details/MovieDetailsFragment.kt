@@ -1,4 +1,4 @@
-package com.example.moviesdb.views
+package com.example.moviesdb.views.movie_details
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
