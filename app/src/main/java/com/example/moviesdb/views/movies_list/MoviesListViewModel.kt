@@ -14,7 +14,10 @@ import kotlinx.coroutines.withContext
 
 private const val PAGE_RESPONSE_SIZE = 20
 
+enum class LoadingStatus { LOADING, DONE, ERROR}
+
 class MoviesListViewModel(application: Application) : AndroidViewModel(application) {
+
     private var pageNumber = 0
 
     private val roomMoviesDataSource by lazy {
@@ -28,6 +31,10 @@ class MoviesListViewModel(application: Application) : AndroidViewModel(applicati
     private val _moviesListDB = MutableLiveData<List<MovieT>>()
     val moviesListDB: LiveData<List<MovieT>>
         get() = _moviesListDB
+
+    private val _loadingStatus = MutableLiveData<LoadingStatus>()
+    val loadingStatus: LiveData<LoadingStatus>
+        get() = _loadingStatus
 
     init {
         getAllMoviesFromDB()
