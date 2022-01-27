@@ -5,21 +5,40 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.moviesdb.R
 import com.example.moviesdb.core.data.MovieT
+import com.example.moviesdb.databinding.FragmentMoviesListBinding
 
 class MoviesListFragment : Fragment() {
+
+    private var _binding: FragmentMoviesListBinding? = null
+    private val binding get() = _binding!!
+
+    private val viewModel: MoviesListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_movies_list, container, false)
+    ): View {
+        _binding = FragmentMoviesListBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        return binding.root
     }
 
-    // TODO: Navigate to details when a movie item clicked
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.viewModel = viewModel
+        binding.moviesRv.apply {
+//            layoutManager = GridLayoutManager(context, 1)
+            adapter = MoviesListAdapter(MoviesListAdapter.MovieItemListener {
+                navigateToMovieDetailsFragment(it)
+            })
+        }
+    }
+
     private fun navigateToMovieDetailsFragment(movie: MovieT) {
         findNavController().navigate(
             MoviesListFragmentDirections.toMovieDetailsFragment(movie)

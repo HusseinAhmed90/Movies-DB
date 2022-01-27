@@ -41,11 +41,16 @@ class MoviesListViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     private fun getAllMoviesFromDB() {
+        _loadingStatus.value = LoadingStatus.LOADING
         viewModelScope.launch(Dispatchers.IO) {
             val moviesDB = roomMoviesDataSource.getAllMovies()
             withContext(Dispatchers.Main) {
                 pageNumber = (moviesDB.size / PAGE_RESPONSE_SIZE) + 1
                 _moviesListDB.value = moviesDB
+                _loadingStatus.value = LoadingStatus.DONE
+                if (moviesDB.isEmpty()) {
+                    getMoviesFromApi()
+                }
             }
         }
     }
@@ -60,12 +65,18 @@ class MoviesListViewModel(application: Application) : AndroidViewModel(applicati
         }
     }
 
-    // TODO Call when size is ZERO || Scroll for new data
-    fun getMoviesFromApi() {
+    //  Call when size is ZERO || TODO Scroll for new data
+    private fun getMoviesFromApi() {
+        _loadingStatus.value = LoadingStatus.LOADING
         viewModelScope.launch(Dispatchers.IO) {
             val moviesApi = networkMoviesDataSource.getMoviesFromApi(pageNumber)
             roomMoviesDataSource.insertMovies(moviesApi)
-            getAllMoviesFromDB()
+            val moviesDB = roomMoviesDataSource.getAllMovies()
+            withContext(Dispatchers.Main) {
+                pageNumber = (moviesDB.size / PAGE_RESPONSE_SIZE) + 1
+                _moviesListDB.value = moviesDB
+                _loadingStatus.value = LoadingStatus.DONE
+            }
         }
     }
     // TODO Add TO Favorites + + +
