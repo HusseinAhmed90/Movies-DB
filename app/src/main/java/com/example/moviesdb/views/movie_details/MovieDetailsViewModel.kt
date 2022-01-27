@@ -1,4 +1,4 @@
-package com.example.moviesdb.viewmodel
+package com.example.moviesdb.views.movie_details
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
