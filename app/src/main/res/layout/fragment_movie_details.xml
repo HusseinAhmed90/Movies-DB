@@ -1,14 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".views.movie_details.MovieDetailsFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    
+    <data>
+        <variable
+            name="movie"
+            type="com.example.moviesdb.core.data.MovieT" />
+    </data>
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".views.movie_details.MovieDetailsFragment">
+
+            <ImageView
+                android:id="@+id/poster_iv"
+                android:layout_width="match_parent"
+                android:layout_height="512dp"
+                android:contentDescription="@string/movie_poster"
+                android:scaleType="centerCrop"
+                app:imageUrlDetails="@{movie.poster_path}"
+                android:src="@drawable/movie_place_holder"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/movie_title_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/lato_bold"
+                android:padding="8dp"
+                android:textAlignment="center"
+                android:textSize="22sp"
+                android:text="@{movie.title}"
+                app:layout_constraintTop_toBottomOf="@id/poster_iv"
+                tools:text="@string/movie_title" />
+
+            <TextView
+                android:id="@+id/movie_overview_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/lato_italic"
+                android:padding="8dp"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                android:text="@{movie.overview}"
+                app:layout_constraintTop_toBottomOf="@id/movie_title_tv"
+                tools:text="@string/movie_overview" />
+
+            <TextView
+                android:id="@+id/movie_release_date_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/lato_regular"
+                android:padding="8dp"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:text="@{movie.release_date}"
+                app:layout_constraintTop_toBottomOf="@id/movie_overview_tv"
+                tools:text="@string/release_date" />
+
+            <TextView
+                android:id="@+id/movie_vote_avg_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/lato_bold"
+                android:padding="8dp"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:text="@{String.valueOf(movie.vote_average)}"
+                app:layout_constraintTop_toBottomOf="@id/movie_release_date_tv"
+                tools:text="@string/vote_avg" />
+
+            <TextView
+                android:id="@+id/movie_popularity_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="@font/lato_bold"
+                android:padding="8dp"
+                android:textAlignment="center"
+                android:textSize="12sp"
+                android:text="@{String.valueOf(movie.popularity)}"
+                app:layout_constraintTop_toBottomOf="@id/movie_vote_avg_tv"
+                tools:text="@string/popularity" />
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:numStars="5"
+                android:padding="8dp"
+                android:progressDrawable="@drawable/custom_rating_bar_selector"
+                android:rating="3.0"
+                android:stepSize="0.2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/movie_popularity_tv" />
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_margin="8dp"
+                android:background="@color/design_default_color_on_primary"
+                android:padding="4dp"
+                android:src="@drawable/ic_star_on"
+                app:layout_constraintBottom_toBottomOf="@id/poster_iv"
+                app:layout_constraintEnd_toEndOf="@id/poster_iv" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

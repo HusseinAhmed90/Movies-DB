@@ -4,4 +4,9 @@
     <string name="movie_title">Movie title</string>
     <string name="movie_poster">Movie Poster</string>
     <string name="status_img">Status Image</string>
+    <string name="movie_overview">Overview</string>
+    <string name="release_date">2021-11-03</string>
+<!--    <string name="vote_avg">Vote Average: 7.3</string>-->
+    <string name="vote_avg">Vote Average: %1$s</string>
+    <string name="popularity">Popularity: %1$s</string>
 </resources>

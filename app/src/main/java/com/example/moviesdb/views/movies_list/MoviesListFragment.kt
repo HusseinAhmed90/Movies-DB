@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import com.example.moviesdb.R
 import com.example.moviesdb.core.data.MovieT
 import com.example.moviesdb.databinding.FragmentMoviesListBinding
 
@@ -32,7 +30,6 @@ class MoviesListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.viewModel = viewModel
         binding.moviesRv.apply {
-//            layoutManager = GridLayoutManager(context, 1)
             adapter = MoviesListAdapter(MoviesListAdapter.MovieItemListener {
                 navigateToMovieDetailsFragment(it)
             })
