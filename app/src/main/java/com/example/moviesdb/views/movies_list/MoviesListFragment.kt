@@ -14,7 +14,6 @@ class MoviesListFragment : Fragment() {
 
     private var _binding: FragmentMoviesListBinding? = null
     private val binding get() = _binding!!
-
     private val viewModel: MoviesListViewModel by viewModels()
 
     override fun onCreateView(
@@ -40,6 +39,11 @@ class MoviesListFragment : Fragment() {
         findNavController().navigate(
             MoviesListFragmentDirections.toMovieDetailsFragment(movie)
         )
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getAllMoviesFromDB()
     }
 
 }

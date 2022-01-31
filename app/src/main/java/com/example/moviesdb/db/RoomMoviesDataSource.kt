@@ -18,4 +18,6 @@ class RoomMoviesDataSource(context: Context): MoviesDBDataSource {
 
     override suspend fun removeFromFavorite(movieId: Long) = movieDao.removeFromFavorite(movieId)
 
+    override suspend fun updateMovieRate(movieId: Long, rate: Float) = movieDao.updateMovieRate(movieId, rate)
+
 }
