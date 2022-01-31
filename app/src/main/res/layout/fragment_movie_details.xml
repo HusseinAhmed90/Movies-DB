@@ -7,6 +7,9 @@
         <variable
             name="movie"
             type="com.example.moviesdb.core.data.MovieT" />
+        <variable
+            name="viewModel"
+            type="com.example.moviesdb.views.movie_details.MovieDetailsViewModel" />
     </data>
 
     <ScrollView
@@ -97,7 +100,6 @@
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
                 android:layout_margin="8dp"
                 android:numStars="5"
                 android:stepSize="0.5"
@@ -123,13 +125,14 @@
                 />
 
             <ImageView
-                android:id="@+id/img"
+                android:id="@+id/isFavoriteIv"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_margin="8dp"
-                android:background="@color/design_default_color_on_primary"
-                android:padding="4dp"
-                android:src="@drawable/ic_star_on"
+                android:padding="6dp"
+                tools:src="@drawable/ic_star_on"
+                android:background="@drawable/is_fav_movie_bg_shape"
+                app:isFavoriteMovie="@{viewModel.isFavorite}"
                 app:layout_constraintBottom_toBottomOf="@id/poster_iv"
                 app:layout_constraintEnd_toEndOf="@id/poster_iv" />
 

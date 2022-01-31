@@ -22,3 +22,11 @@ fun bindImage(imageView: ImageView, posterPath: String?) {
             .into(imageView)
     }
 }
+
+@BindingAdapter("isFavoriteMovie")
+fun bindImageIsFavoriteMovie(imageView: ImageView, i: Int?) {
+    when(i) {
+        0 -> imageView.setImageResource(R.drawable.ic_star_off)
+        1 -> imageView.setImageResource(R.drawable.ic_star_on)
+    }
+}
