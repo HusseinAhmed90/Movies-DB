@@ -33,6 +33,8 @@ class MovieDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val movie = args.movie
         binding.movie = movie
+        viewModel.isFavoriteMovie(movie.isFavorite)
+        binding.viewModel = viewModel
         binding.doneRatingBtn.isEnabled = false
 
         binding.ratingBar.setOnRatingBarChangeListener { _, _, _ ->
@@ -49,6 +51,19 @@ class MovieDetailsFragment : Fragment() {
             binding.ratingBar.rating = it
             showShowSnackBar("Movie rate Updated: $it")
         })
+
+        binding.isFavoriteIv.setOnClickListener {
+            when(viewModel.isFavorite.value) {
+                0 -> {
+                    viewModel.addToFavorite(movie.id)
+                    showShowSnackBar("The movie is add to favorites")
+                }
+                1 -> {
+                    viewModel.removeFromFavorite(movie.id)
+                    showShowSnackBar("The movie is removed from favorites")
+                }
+            }
+        }
 
     }
 
