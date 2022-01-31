@@ -14,7 +14,6 @@ import com.google.android.material.snackbar.Snackbar
 
 class MovieDetailsFragment : Fragment() {
 
-
     private var _binding: FragmentMovieDetailsBinding? = null
     private val binding get() = _binding!!
     private val args: MovieDetailsFragmentArgs by navArgs()
