@@ -14,4 +14,6 @@ interface MoviesDBDataSource {
 
     suspend fun removeFromFavorite(movieId: Long)
 
+    suspend fun updateMovieRate(movieId: Long, rate: Float)
+
 }

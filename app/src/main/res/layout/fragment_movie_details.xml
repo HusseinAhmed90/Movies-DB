@@ -93,19 +93,34 @@
                 app:layout_constraintTop_toBottomOf="@id/movie_vote_avg_tv"
                 tools:text="@string/popularity" />
 
-            <androidx.appcompat.widget.AppCompatRatingBar
+            <RatingBar
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_margin="8dp"
                 android:numStars="5"
-                android:padding="8dp"
-                android:progressDrawable="@drawable/custom_rating_bar_selector"
-                android:rating="3.0"
-                android:stepSize="0.2"
+                android:stepSize="0.5"
+                android:rating="@{movie.rate}"
+                style="?android:attr/ratingBarStyleIndicator"
+                android:isIndicator="false"
+                tools:rating="2.5"
+                android:progressTint="@color/purple_500"
+                android:progressBackgroundTint="@color/purple_200"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/movie_popularity_tv" />
+                app:layout_constraintTop_toBottomOf="@id/movie_popularity_tv"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <ImageButton
+                android:id="@+id/doneRatingBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_done_24"
+                app:layout_constraintStart_toEndOf="@id/ratingBar"
+                app:layout_constraintTop_toTopOf="@id/ratingBar"
+                app:layout_constraintBottom_toBottomOf="@id/ratingBar"
+                />
 
             <ImageView
                 android:id="@+id/img"

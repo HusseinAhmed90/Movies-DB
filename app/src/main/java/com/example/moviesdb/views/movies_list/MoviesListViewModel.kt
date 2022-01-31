@@ -28,7 +28,7 @@ class MoviesListViewModel(application: Application) : AndroidViewModel(applicati
         NetworkMoviesDataSource()
     }
 
-    private val _moviesListDB = MutableLiveData<List<MovieT>>()
+    private var _moviesListDB = MutableLiveData<List<MovieT>>()
     val moviesListDB: LiveData<List<MovieT>>
         get() = _moviesListDB
 
@@ -40,12 +40,12 @@ class MoviesListViewModel(application: Application) : AndroidViewModel(applicati
         getAllMoviesFromDB()
     }
 
-    private fun getAllMoviesFromDB() {
+    fun getAllMoviesFromDB() {
         _loadingStatus.value = LoadingStatus.LOADING
         viewModelScope.launch(Dispatchers.IO) {
             val moviesDB = roomMoviesDataSource.getAllMovies()
             withContext(Dispatchers.Main) {
-                pageNumber = (moviesDB.size / PAGE_RESPONSE_SIZE) + 1
+                pageNumber = (moviesDB.size.div(PAGE_RESPONSE_SIZE)).plus(1)
                 _moviesListDB.value = moviesDB
                 _loadingStatus.value = LoadingStatus.DONE
                 if (moviesDB.isEmpty()) {
@@ -77,18 +77,6 @@ class MoviesListViewModel(application: Application) : AndroidViewModel(applicati
                 _moviesListDB.value = moviesDB
                 _loadingStatus.value = LoadingStatus.DONE
             }
-        }
-    }
-    // TODO Add TO Favorites + + +
-    fun addToFavorite(movieId: Long) {
-        viewModelScope.launch(Dispatchers.IO) {
-            roomMoviesDataSource.addToFavorite(movieId)
-        }
-    }
-    // TODO Remove From Favorites - - -
-    fun removeFromFavorite(movieId: Long) {
-        viewModelScope.launch(Dispatchers.IO) {
-            roomMoviesDataSource.removeFromFavorite(movieId)
         }
     }
 

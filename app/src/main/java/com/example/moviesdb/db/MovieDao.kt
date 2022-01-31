@@ -19,6 +19,9 @@ interface MovieDao {
     @Query("SELECT * FROM movies_table WHERE isFavorite = 1")
     suspend fun getFavoriteMovies(): List<MovieT>
 
+    @Query("UPDATE movies_table SET rate = :rate WHERE id = :movieId")
+    suspend fun updateMovieRate(movieId: Long, rate: Float)
+
     @Query("UPDATE movies_table SET isFavorite = 1 WHERE id = :movieId")
     suspend fun addToFavorite(movieId: Long)
 
